@@ -1,8 +1,8 @@
 ---
-name: wif-ci
+name: Build and Push Python Image to Google Cloud Platform
 on:
   push:
-    branches:- 'main'
+    branches: [ main ]
 jobs:
   build:
     name: "Test WIF"
