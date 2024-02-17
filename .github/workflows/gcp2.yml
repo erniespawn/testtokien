@@ -16,7 +16,7 @@ jobs:
 
     - uses: google-github-actions/setup-gcloud@v0.3.0
       with:
-#        service_account_key: ${{ secrets.SA }}
+        service_account_key: ${{ secrets.SA }}
         workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/github-bucket/providers/gh-bucket'
         service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
         project_id: github-actions-384318
