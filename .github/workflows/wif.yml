@@ -98,8 +98,12 @@ jobs:
           workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/github-bucket/providers/gh-bucket'
           service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
 
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v1"
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
 
       - name: "List buckets"
         run: "gcloud storage ls"
