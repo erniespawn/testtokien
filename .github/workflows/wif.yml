@@ -78,33 +78,54 @@
 
 
 
+#
+#
+#name: GitHub Actions Workload Identity Demo
+#on: [push]
+#jobs:
+#  List-Buckets:
+#    permissions:
+#      contents: "read"
+#      id-token: "write"
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: "actions/checkout@v3"
+#
+#      - id: "auth"
+#        name: "Authenticate to Google Cloud"
+#        uses: "google-github-actions/auth@v1"
+#        with:
+#          workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/github-bucket/providers/gh-bucket'
+#          service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
+#
+#
+#      - name: 'Set up Cloud SDK'
+#        uses: 'google-github-actions/setup-gcloud@v2'
+#
+#      - name: 'Use gcloud CLI'
+#        run: 'gcloud info'
+#
+#      - name: "List buckets"
+#        run: "gcloud storage ls"
 
-
-name: GitHub Actions Workload Identity Demo
-on: [push]
 jobs:
-  List-Buckets:
+  job_id:
+    # Add "id-token" with the intended permissions.
     permissions:
-      contents: "read"
-      id-token: "write"
-    runs-on: ubuntu-latest
+      contents: 'read'
+      id-token: 'write'
+
     steps:
-      - uses: "actions/checkout@v3"
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/github-bucket/providers/gh-bucket'
+        service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
 
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v1"
-        with:
-          workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/github-bucket/providers/gh-bucket'
-          service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v2'
+      with:
+        version: '>= 363.0.0'
 
-
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
-
-      - name: 'Use gcloud CLI'
-        run: 'gcloud info'
-
-      - name: "List buckets"
-        run: "gcloud storage ls"
-
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
