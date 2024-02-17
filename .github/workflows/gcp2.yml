@@ -18,7 +18,7 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1.0.0'
         with:
-          workload_identity_provider: 'projects/32549352397/locations/global/workloadIdentityPools/github/providers/github'
+          workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/github/providers/github'
           service_account: 'bucket-dev@blue-project-378421.iam.gserviceaccount.com'
 
       - id: 'prdAuth'
@@ -26,7 +26,7 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1.0.0'
         with:
-          workload_identity_provider: 'projects/32549352397/locations/global/workloadIdentityPools/github/providers/github'
+          workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/github/providers/github'
           service_account: 'bucket-prd@blue-project-378421.iam.gserviceaccount.com'
 
       # Install gcloud, automatically picks up authentication from auth.
