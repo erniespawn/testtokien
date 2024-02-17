@@ -67,10 +67,9 @@ jobs:
       uses: 'google-github-actions/auth@v1'
       with:
         token_format: 'access_token'
-        workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/dev-github-wif-my-pool/providers/dev-github-wif-my-pool'
-        service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
+        workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/github-bucket/providers/gh-bucket'
+        service_account: 'bucket@github-actions-384318.iam.gserviceaccount.com'
 
     # List the instances in the project
     - name: List Instances
-      run: |-
-        gcloud compute instances list --project github-actions-384318
+      run: gcloud container images list --repository=gcr.io/github-actions-384318
