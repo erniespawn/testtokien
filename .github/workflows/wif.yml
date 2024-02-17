@@ -93,7 +93,7 @@ jobs:
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v0"
+        uses: "google-github-actions/auth@v1"
         with:
           workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/github-bucket/providers/gh-bucket'
           service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
