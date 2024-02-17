@@ -45,7 +45,5 @@ jobs:
       - id: listPrdBucket
         name: List Content of PrdBucket
         #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: |-
-        gcloud auth login --quiet
-        gcloud storage ls gs://insert-prd
+        run: gcloud storage ls gs://insert-prd
         continue-on-error: true
