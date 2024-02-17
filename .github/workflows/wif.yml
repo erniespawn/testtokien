@@ -40,6 +40,6 @@ jobs:
 
       - name: run terraform commands
         run: |
-          gcloud config set project ${{env.PROJECT_ID}}
+#          gcloud config set project ${{env.PROJECT_ID}}
           gcloud artifacts packages list --repository=maven-packages \
           --location=europe-west1
