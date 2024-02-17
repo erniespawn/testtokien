@@ -36,11 +36,16 @@ jobs:
       - id: listDevBucket
         name: List Content of DevBucket
         #if: github.event_name == 'pull_request'
-        run: gcloud storage ls gs://insert-dev
+        run: |-
+          gcloud auth login --quiet
+          gcloud storage ls gs://insert-dev
+#        run: gcloud storage ls gs://insert-dev
         continue-on-error: true
 
       - id: listPrdBucket
         name: List Content of PrdBucket
         #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: gcloud storage ls gs://insert-prd
+        run: |-
+        gcloud auth login --quiet
+        gcloud storage ls gs://insert-prd
         continue-on-error: true
