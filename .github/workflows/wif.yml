@@ -39,5 +39,4 @@ jobs:
           version: '>= 363.0.0'
 
       - name: run terraform commands
-        run: gcloud artifacts packages list --repository=maven-packages \
-          --location=europe-west1
+        run: gcloud auth list
