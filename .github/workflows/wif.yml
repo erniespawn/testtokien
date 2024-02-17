@@ -25,7 +25,7 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           create_credentials_file: 'true'
-          workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/gitlab-demo-wip-88/providers/gitlab-identity-provider'
+          workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/dev-github-wif-my-pool/providers/dev-github-wif-my-pool'
 
          # Below are from the above terraform code
          # workloadIdentityPools = gh-identity-pool
