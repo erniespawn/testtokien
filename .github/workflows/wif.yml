@@ -37,42 +37,70 @@
 #
 #      - name: run terraform commands
 #        run: gcloud secrets versions access 1 --secret="testing-secret"
+#
+#
+#name: Connect to GCP and List Instances
+#
+#on:
+#  push:
+#    branches: [ "main" ]
+#
+#env:
+#  PROJECT_ID: github-actions-384318
+#
+#jobs:
+#  setup-prepare-list:
+#    name: Setup, Prepare,
+#    runs-on: ubuntu-latest
+#
+#    permissions:
+#      contents: 'read'
+#      id-token: 'write'
+#
+#    steps:
+#    - name: Checkout
+#      uses: actions/checkout@v3
+#
+#    # Configure Workload Identity Federation and generate an access token.
+#    - id: 'auth'
+#      name: 'Authenticate to Google Cloud'
+#      uses: 'google-github-actions/auth@v1'
+#      with:
+#        token_format: 'access_token'
+#        workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/github-bucket/providers/gh-bucket'
+#        service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
+#
+#    # List the instances in the project
+#    - name: List Instances
+#      run: gcloud container images list --repository=gcr.io/github-actions-384318
+
+#gcloud iam service-accounts add-iam-policy-binding "test-wif@github-actions-384318.iam.gserviceaccount.com" --project="github-actions-384318" --role="roles/iam.serviceAccountTokenCreator" --member=principal://iam.googleapis.com/projects/221742135820/locations/global/workloadIdentityPools/github-bucket/subject/SUBJECT_ATTRIBUTE_VALUE
 
 
-name: Connect to GCP and List Instances
 
-on:
-  push:
-    branches: [ "main" ]
 
-env:
-  PROJECT_ID: github-actions-384318
 
+name: GitHub Actions Workload Identity Demo
+on: [push]
 jobs:
-  setup-prepare-list:
-    name: Setup, Prepare,
-    runs-on: ubuntu-latest
-
+  List-Buckets:
     permissions:
-      contents: 'read'
-      id-token: 'write'
-
+      contents: "read"
+      id-token: "write"
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      - uses: "actions/checkout@v3"
 
-    # Configure Workload Identity Federation and generate an access token.
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        token_format: 'access_token'
-        workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/github-bucket/providers/gh-bucket'
-        service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v0"
+        with:
+          workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/github-bucket/providers/gh-bucket'
+          service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
 
-    # List the instances in the project
-    - name: List Instances
-      run: gcloud container images list --repository=gcr.io/github-actions-384318
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v0"
 
-#gcloud iam service-accounts add-iam-policy-binding "bucket@github-actions-384318.iam.gserviceaccount.com" --project="github-actions-384318" --role="roles/iam.serviceAccountTokenCreator" --member=bucket@github-actions-384318.iam.gserviceaccount.com
+      - name: "List buckets"
+        run: "gcloud storage ls"
 
