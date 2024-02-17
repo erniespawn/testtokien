@@ -68,7 +68,7 @@ jobs:
       with:
         token_format: 'access_token'
         workload_identity_provider:  'projects/221742135820/locations/global/workloadIdentityPools/github-bucket/providers/gh-bucket'
-        service_account: 'sa-861@github-actions-384318.iam.gserviceaccount.com'
+        service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
 
     # List the instances in the project
     - name: List Instances
