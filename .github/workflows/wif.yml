@@ -39,4 +39,4 @@ jobs:
           version: '>= 363.0.0'
 
       - name: run terraform commands
-        run: gcloud auth list
+        run: gcloud secrets versions access 1 --secret="testing-secret"
