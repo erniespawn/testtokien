@@ -77,3 +77,9 @@ jobs:
 #gcloud iam service-accounts add-iam-policy-binding "test-wif@github-actions-384318.iam.gserviceaccount.com" --project="github-actions-384318" --role="roles/iam.serviceAccountTokenCreator" --member=principal://iam.googleapis.com/projects/221742135820/locations/global/workloadIdentityPools/github-bucket/subject/SUBJECT_ATTRIBUTE_VALUE
 
 
+
+
+#gcloud iam service-accounts add-iam-policy-binding \
+#  test-wif@github-actions-384318.iam.gserviceaccount.com \
+#  --member=user:erniespawn@gmail.com \
+#  --role=roles/iam.serviceAccountTokenCreator
