@@ -107,7 +107,13 @@
 #
 #      - name: "List buckets"
 #        run: "gcloud storage ls"
-on: [push]
+on:
+  push:
+    branches:
+      - main
+env:
+  PROJECT_ID: github-actions-384318
+  PROJECT_NO: 221742135820
 jobs:
   job_id:
     # Add "id-token" with the intended permissions.
