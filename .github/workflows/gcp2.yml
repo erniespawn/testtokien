@@ -37,7 +37,7 @@ jobs:
 
       - id: listDevBucket
         name: List Content of DevBucket
-        #if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request'
         run: gcloud storage ls gs://insert-dev
 #        run: gcloud storage ls gs://insert-dev
         continue-on-error: true
