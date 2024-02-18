@@ -1,4 +1,4 @@
-name: Multiple GCP identity Demo 4
+name: Multiple GCP identity Demo 6
 on:
   push:
     branches: [ "main" ]
