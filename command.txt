@@ -1,0 +1,27 @@
+
+
+# document https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers#iam-workload-pools-list-gcloud
+
+gcloud iam workload-identity-pools list --location=global
+
+gcloud iam workload-identity-pools describe github  --location=global
+
+export PROJECT_ID="github-wif-88"
+export PROJECT_NUMBER="590883794651"
+export DEV_BUCKET="insert-gh-dev"
+export PRD_BUCKET="insert-gh-prd"
+
+gcloud storage buckets create gs://$DEV_BUCKET --project=$PROJECT_ID --default-storage-class=STANDARD --location=EUROPE-WEST1 --uniform-bucket-level-access
+
+gcloud storage buckets create gs://$PRD_BUCKET --project=$PROJECT_ID --default-storage-class=STANDARD --location=EUROPE-WEST1 --uniform-bucket-level-access
+
+
+gcloud storage buckets add-iam-policy-binding gs://${PRD_BUCKET} \
+  --member=serviceAccount:github-wif-88@github-wif-88.iam.gserviceaccount.com \
+  --role=roles/storage.objectViewer --role=roles/iam.serviceAccountTokenCreator
+
+
+gcloud iam service-accounts add-iam-policy-binding "bucket-prd@github-wif-88.iam.gserviceaccount.com" \
+  --project="${PROJECT_ID}" \
+  --role="roles/iam.workloadIdentityUser" \
+  --member="principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/github/attribute.workflow_ref/erniespawn/workload-identity-federation/.github/workflows/multi-id.yaml@refs/heads/main"
