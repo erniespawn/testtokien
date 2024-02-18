@@ -20,9 +20,7 @@ jobs:
         with:
           workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/github/providers/github'
           service_account: 'bucket-dev@github-actions-384318.iam.gserviceaccount.com'
-          delegates: 'bucket-dev@github-actions-384318.iam.gserviceaccount.com'
-          token_format: "access_token"
-          access_token_lifetime: 3600s
+
 
       - id: 'prdAuth'
         if: github.ref == 'refs/heads/main'
@@ -31,9 +29,7 @@ jobs:
         with:
           workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/github/providers/github'
           service_account: 'bucket-prd@github-actions-384318.iam.gserviceaccount.com'
-          delegates: 'bucket-prd@github-actions-384318.iam.gserviceaccount.com'
-          token_format: "access_token"
-          access_token_lifetime: 3600s
+
 
       # Install gcloud, automatically picks up authentication from auth.
       - name: 'Set up Cloud SDK'
