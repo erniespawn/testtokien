@@ -28,7 +28,7 @@ jobs:
         uses: 'google-github-actions/auth@v1.0.0'
         with:
           workload_identity_provider: 'projects/221742135820/locations/global/workloadIdentityPools/github/providers/github'
-          service_account: 'bucket-prd@github-actions-384318.iam.gserviceaccount.com'
+          service_account: 'test-wif@github-actions-384318.iam.gserviceaccount.com'
 
 
       # Install gcloud, automatically picks up authentication from auth.
@@ -48,3 +48,35 @@ jobs:
         run: gcloud storage ls gs://insert-prd
         continue-on-error: true
 
+#
+#gcloud iam service-accounts add-iam-policy-binding "bucket-prd@github-actions-384318.iam.gserviceaccount.com" \
+#  --project="${PROJECT_ID}" \
+#  --role="roles/iam.workloadIdentityUser" \
+#  --member="principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/github/attribute.workflow_ref/erniespawn/workload-identity-federation/.github/workflows/gcp2.yaml@refs/heads/main"
+#
+#gcloud projects add-iam-policy-binding github-actions-384318 \
+#--member=serviceAccount:github-actions-384318@appspot.gserviceaccount.com \
+#--role=roles/iam.serviceAccountTokenCreator
+#
+#export DEV_BUCKET=insert-dev
+#export PRD_BUCKET=insert-prd
+#
+#gcloud storage buckets add-iam-policy-binding gs://${DEV_BUCKET} \
+#  --member=serviceAccount:bucket-dev@${PROJECT_ID}.iam.gserviceaccount.com \
+#  --role=roles/storage.objectViewer
+#
+#gcloud storage buckets add-iam-policy-binding gs://${PRD_BUCKET} \
+#  --member=serviceAccount:bucket-prd@${PROJECT_ID}.iam.gserviceaccount.com \
+#  --role=roles/storage.objectViewer
+#
+#gcloud iam service-accounts add-iam-policy-binding "bucket-dev@${PROJECT_ID}.iam.gserviceaccount.com" \
+#  --project="${PROJECT_ID}" \
+#  --role="roles/iam.workloadIdentityUser" \
+#  --member="principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/github/attribute.event_name/pull_request"
+#
+#
+#gcloud iam service-accounts add-iam-policy-binding "bucket-prd@${PROJECT_ID}.iam.gserviceaccount.com" \
+#  --project="${PROJECT_ID}" \
+#  --role="roles/iam.workloadIdentityUser" \
+#  --member="principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/github/attribute.workflow_ref/erniespawn/workload-identity-federation/.github/workflows/gcp2.yaml@refs/heads/main"
+#
