@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/testtokien.iml" filepath="$PROJECT_DIR$/.idea/testtokien.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../workflow-identity-pool/.idea/workflow-identity-pool.iml" filepath="$PROJECT_DIR$/../workflow-identity-pool/.idea/workflow-identity-pool.iml" />
     </modules>
   </component>
 </project>
